@@ -39,8 +39,8 @@ def get_desafio():
 		}
 
 		for nome in nomes:
-			print(nome)
-		print(media)
+			print("\t%s" % nome)
+		print("\n\tMedia: %d\n\n" % media)
 	else:
 		obj = {"msg": "numero de registros é 0"}
 
@@ -49,9 +49,9 @@ def get_desafio():
 
 def post(json):
 
-	def errorResponse(err):
-		response.status = 500
-		print("\n\n{}\n".format(err))
+	def errorResponse(err, status_=500):
+		response.status = status_
+		print("\n\nErro:\n\t{}\n".format(err))
 		session.rollback()
 		return { "error": err }
 
@@ -75,9 +75,9 @@ def post(json):
 
 	try:
 		session.add(customer)
-		print('Registro adicionado')
+		print('Registro adicionado.\nRealizando Commit.')
 		session.commit()
-		print('Commit.')
+		print('Commit Realizado com suceso.')
 		response.status = 204
 		pass
 	except AmbiguousForeignKeysError:
